@@ -1,85 +1,90 @@
 <template>
     <div class="container">
-	<header class="header">header</header>
-	<main   class="main"  >
-	    <div class="hello">
-		<h1>{{ msg }}</h1>
-	    </div>
-	</main>
-	<aside  class="aside" >aside</aside>
-	<nav    class="nav"   >nav</nav>
-	<footer class="footer">footer</footer>
+    	<header class="header">header</header>
+	<asideFolder class="asideFolder">
+	    <FolderList
+	    />
+	</asideFolder>
+	<asideTag class="asideTag" >
+	    <FilterableDropdown :items="itemArray" v-model="selectedValue" />
+	</asideTag>
+	<mdeditor id="mdeditor">
+	    <div class="span"></div>
+	    <MarkdownEditor />
+	</mdeditor>
+	<guieditor class="guieditor">gui</guieditor>
+	<footer class="footer">footer</footer>	
     </div>
 </template>
 
+
 <script>
-export default {
-  name: 'Index',
-  data () {
-    return {
-      msg: 'Welcome to markd-mind'
-    }
-  }
-}
+ import FolderList from './FolderList.vue'
+ import FilterableDropdown from './FilterableDropdown.vue'
+ import MarkdownEditor from './MarkdownEditor.vue'
+ export default {
+     name: 'Index',
+     components: { FolderList, FilterableDropdown, MarkdownEditor },
+ }
+ 
 </script>
 
 
 <style>
+ .span {
+     margin: 5px;
+     clear: both;
+ }
  .container {
      border: solid 1px black;
      display: grid;
-     /* 1列目から順番に180px、1fr、160pxの幅 */
-     grid-template-columns: 180px 1fr 160px;
-     /* 1行目から順番に60px 1fr 90pxの高さ */
+     grid-template-columns: 180px 180px 0.5fr 0.5fr;
      grid-template-rows: 60px 1fr 600px;
  }
  .header {
      border: solid 1px black;
-
-     /* 列の1本目から4本目のグリッドラインまで */
      grid-column-start: 1;
-     grid-column-end: 4;
-     /* 行の1本目から2本目のグリッドラインまで */
+     grid-column-end: 5;
      grid-row-start: 1;
      grid-row-end: auto;
  }
 
- .main {
+ .asideFolder {
      border: solid 1px black;
-     /* 列の2本目から3本目のグリッドラインまで */
-     grid-column-start: 2;
+     grid-column-start: 1;
      grid-column-end: auto;
-     /* 行の2本目から3本目のグリッドラインまで */
      grid-row-start: 2;
      grid-row-end: 4;
  }
 
- .aside {
+ .asideTag {
      border: solid 1px black;
-     /* 列の1本目から2本目のグリッドラインまで */
-     grid-column-start: 1;
+     grid-column-start: 2;
      grid-column-end: auto;
-     /* 行の2本目から3本目のグリッドラインまで */
      grid-row-start: 2;
-     grid-row-end: auto;
+     grid-row-end: 4;
  }
 
- .nav {
+ .mdeditor {
      border: solid 1px black;
-     /* 列の3本目から4本目のグリッドラインまで */
      grid-column-start: 3;
      grid-column-end: auto;
-     /* 行の2本目から3本目のグリッドラインまで */
-     grid-row-start: auto;
-     grid-row-end: auto;
+     grid-row-start: 2;
+     grid-row-end: 4;
+ }
+
+ .guieditor {
+     border: solid 1px black;
+     grid-column-start: 4;
+     grid-column-end: auto;
+     grid-row-start: 2;
+     grid-row-end: 4;
  }
 
  .footer {
      border: solid 1px black;
-     /* 列の1本目から4本目のグリッドラインまで */
      grid-column-start: 1;
-     grid-column-end: 4;
-     /* 行の3本目から4本目のグリッドラインまで */
+     grid-column-end: 5;
      grid-row-start: auto;
      grid-row-end: auto;
  } 
